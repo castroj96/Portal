@@ -106,6 +106,9 @@
                         <div class="carousel-item">
                             <img src="{{ asset('img/aya.png') }}" alt="ice">
                         </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/mopt.png') }}" alt="ice">
+                        </div>
                     </div>
             
                     <!--Controles NEXT y PREV-->
