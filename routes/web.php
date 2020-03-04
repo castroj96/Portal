@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/reporteIncidencias', function () {
+    return view('reporteIncidencias');
+});
 
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+
