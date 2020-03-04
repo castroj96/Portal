@@ -4,12 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Portal - Registro de Incidencias</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
         <style>
             html, body {
                 background-color: #fff;
@@ -45,13 +47,14 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 60px;
+                color: #52AEFF;
             }
 
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
-                font-size: 13px;
+                font-size: 10px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
@@ -68,31 +71,26 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">{{__('commons.home')}}</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">{{__('commons.login')}}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}">{{__('commons.register')}}</a>
                         @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-b-sm">
+                    {{__('commons.title')}}
                 </div>
+                
+                <p class="page-header">Un portal donde podemos mejorar nuestra comunidad</p>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="#">{{__('commons.siteMap')}}</a>
                 </div>
             </div>
         </div>
