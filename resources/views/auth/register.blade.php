@@ -12,10 +12,10 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="ID" class="col-md-4 col-form-label text-md-right">{{ __('ID') }}</label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('commons.id') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ID" type="text" class="form-control @error('ID') is-invalid @enderror" name="ID" value="{{ old('ID') }}" required autocomplete="ID" autofocus>
+                                <input id="id" type="number" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ old('id') }}" required autocomplete="ID" autofocus>
 
                                 @error('ID')
                                 <span class="invalid-feedback" role="alert">
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('commons.name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="LastName1" class="col-md-4 col-form-label text-md-right">{{ __('LastName1') }}</label>
+                            <label for="LastName1" class="col-md-4 col-form-label text-md-right">{{ __('commons.lastName1') }}</label>
 
                             <div class="col-md-6">
                                 <input id="LastName1" type="text" class="form-control @error('LastName1') is-invalid @enderror" name="LastName1" value="{{ old('LastName1') }}" required autocomplete="LastName1" autofocus>
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="LastName2" class="col-md-4 col-form-label text-md-right">{{ __('LastName2') }}</label>
+                            <label for="LastName2" class="col-md-4 col-form-label text-md-right">{{ __('commons.lastName2') }}</label>
 
                             <div class="col-md-6">
                                 <input id="LastName2" type="text" class="form-control @error('LastName2') is-invalid @enderror" name="LastName2" value="{{ old('LastName2') }}" required autocomplete="name" autofocus>
@@ -110,6 +110,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="Phone" type="number" class="form-control @error('Phone') is-invalid @enderror" name="Phone" value="{{ old('Phone') }}" required autocomplete="Phone" autofocus>
+
+                                @error('Phone')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -130,20 +144,6 @@
                                 <input id="ConfirmEmail" type="email" class="form-control @error('email') is-invalid @enderror" name="ConfirmEmail" value="{{ old('Confirm ') }}" required autocomplete="ConfirmEmail">
 
                                 @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="Phone" type="phone" class="form-control @error('Phone') is-invalid @enderror" name="Phone" value="{{ old('Phone') }}" required autocomplete="Phone" autofocus>
-
-                                @error('Phone')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -176,7 +176,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('commons.register') }}
                                 </button>
                             </div>
                         </div>

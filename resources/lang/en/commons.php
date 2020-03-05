@@ -23,4 +23,8 @@ return [
     'register' => 'Register',
     'home' => 'Home',
     'siteMap' => 'Site Map',
+    'id' => 'Id',
+    'name' => 'Name',
+    'lastName1' => 'Last Name',
+    'lastName2' => 'Mother Last Name',
 ];
