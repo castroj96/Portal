@@ -67,13 +67,66 @@
                             </div>
                         </div>
 
+                        <!--Province-->
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('commons.province') }}</label>
+                            <label for="province" class="col-md-4 col-form-label text-md-right">{{ __('commons.province') }}</label>
 
                             <div class="col-md-6">
-                                <input id="Province" type="text" class="form-control @error('Province') is-invalid @enderror" name="Province" value="{{ old('Province') }}" required autocomplete="Province" autofocus>
+                                <select id="province" name="province" class="form-control @error('province') is-invalid @enderror">
+                                   <!--
+                                        TODO:
+                                        Need to add provinces from db
+                                       -->
+                                </select>
+ 
+                                @error('province')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-                                @error('Province')
+                        <!--canton-->
+                        <div class="form-group row">
+                            <label for="canton" class="col-md-4 col-form-label text-md-right">{{ __('commons.canton') }}</label>
+
+                            <div class="col-md-6 canton">
+                                <select id="canton" name="canton" class="form-control @error('canton') is-invalid @enderror" disabled="true">
+                                </select>
+
+                                @error('canton')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!--district-->
+                        <div class="form-group row">
+                            <label for="district" class="col-md-4 col-form-label text-md-right">{{ __('commons.district') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="district" name="district" class="form-control @error('district') is-invalid @enderror" disabled="true">
+                                </select>
+
+                                @error('district')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!--address-->
+                        <div class="form-group row">
+                            <label for="address1" class="col-md-4 col-form-label text-md-right">{{ __('commons.address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="address1" type="text" class="form-control @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}" required autocomplete="address1" autofocus disabled="true">
+
+                                @error('address1')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -82,35 +135,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Canton') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="Canton" type="text" class="form-control @error('Canton') is-invalid @enderror" name="Canton" value="{{ old('Canton') }}" required autocomplete="Canton" autofocus>
-
-                                @error('Canton')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="District" type="text" class="form-control @error('District') is-invalid @enderror" name="District" value="{{ old('District') }}" required autocomplete="District" autofocus>
-
-                                @error('District')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('commons.phone') }}</label>
 
                             <div class="col-md-6">
                                 <input id="Phone" type="number" class="form-control @error('Phone') is-invalid @enderror" name="Phone" value="{{ old('Phone') }}" required autocomplete="Phone" autofocus>
@@ -124,7 +149,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('commons.email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -138,21 +163,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="ConfirmEmail" class="col-md-4 col-form-label text-md-right">{{ __('Confirm E-Mail Address') }}</label>
+                            <label for="email-confirm" class="col-md-4 col-form-label text-md-right">{{ __('commons.emailConfirm') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ConfirmEmail" type="email" class="form-control @error('email') is-invalid @enderror" name="ConfirmEmail" value="{{ old('Confirm ') }}" required autocomplete="ConfirmEmail">
-
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="email-confirm" type="email" class="form-control" name="ConfirmEmail" value="{{ old('email_confirmation ') }}" required autocomplete="email">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('commons.password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -166,7 +185,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('commons.passwordConfirm') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
