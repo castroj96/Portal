@@ -8,7 +8,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <!--<form method="POST" action="{{ route('register') }}">-->
+                    <form>
                         @csrf
 
                         <div class="form-group row">
@@ -91,7 +92,7 @@
                             <label for="canton" class="col-md-4 col-form-label text-md-right">{{ __('commons.canton') }}</label>
 
                             <div class="col-md-6 canton">
-                                <select id="canton" name="canton" class="form-control @error('canton') is-invalid @enderror" disabled="true">
+                                <select id="canton" name="canton" class="form-control @error('canton') is-invalid @enderror" disabled>
                                 </select>
 
                                 @error('canton')
@@ -107,7 +108,7 @@
                             <label for="district" class="col-md-4 col-form-label text-md-right">{{ __('commons.district') }}</label>
 
                             <div class="col-md-6">
-                                <select id="district" name="district" class="form-control @error('district') is-invalid @enderror" disabled="true">
+                                <select id="district" name="district" class="form-control @error('district') is-invalid @enderror" disabled>
                                 </select>
 
                                 @error('district')
@@ -123,7 +124,7 @@
                             <label for="address1" class="col-md-4 col-form-label text-md-right">{{ __('commons.address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address1" type="text" class="form-control @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}" required autocomplete="address1" autofocus disabled="true">
+                                <input id="address1" type="text" class="form-control @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}" required autocomplete="address1" autofocus>
 
                                 @error('address1')
                                 <span class="invalid-feedback" role="alert">
@@ -205,3 +206,63 @@
     </div>
 </div>
 @endsection
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var _token = $('input[name="_token"]').val();
+        var province = $('select[name="province"]').val();
+        var canton = $('select[name="canton"]').val();
+        var district = $('select[name="district"]').val();
+
+        $("#province").on('click change',function(e){
+            e.preventDefault();
+
+            province = $('select[name="province"]').val();
+
+            $.ajax({
+                url: '/registerCanton',
+                method: "POST",
+                data:{_token: _token, province: province},
+                success: function(data)
+                {
+                    clearSelect("#canton");
+                    clearSelect("#district");
+                    populateSelect(data,"#canton");
+                }
+            })
+        });
+
+        $("#canton").on('click change',function(e){
+            e.preventDefault();
+
+            canton = $('select[name="canton"]').val();
+
+            $.ajax({
+                url: '/registerDistrict',
+                method: "POST",
+                data:{_token: _token, canton: canton},
+                success: function(data)
+                {
+                    clearSelect("#district");
+                    populateSelect(data,"#district");
+                }
+            })
+        });
+
+        function populateSelect(data, name)
+        {
+            $(name).find("select").html();
+            $.each(data, function(key, value) {
+                $(name).append('<option value="' + key + '">' + value + '</option>');
+            });
+            $(name).removeAttr('disabled');
+        }
+
+        function clearSelect(name)
+        {
+            $(name).find('option').remove().html();
+            $(name).attr('disabled', 'disabled');
+        }
+    });
+</script>

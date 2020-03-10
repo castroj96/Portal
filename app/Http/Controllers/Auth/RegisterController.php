@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -53,6 +54,29 @@ class RegisterController extends Controller
         $provinces = DB::table('provinces')->get();
         return view('/auth/register', compact('provinces'));
     }
+
+    /**
+     * Load the canton dropdown menu
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function loadCanton(Request $request)
+    {
+        $cantons = DB::table('cantons')->where('prov', $request->province)->pluck('name', 'id');
+        return response()->json($cantons);
+    }
+
+     /**
+     * Load the district dropdown menu
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function loadDistrict(Request $request)
+    {
+        $districts = DB::table('districts')->where('canton', $request->canton)->pluck('name', 'id');
+        return response()->json($districts);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
