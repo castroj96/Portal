@@ -73,10 +73,9 @@
 
                             <div class="col-md-6">
                                 <select id="province" name="province" class="form-control @error('province') is-invalid @enderror">
-                                   <!--
-                                        TODO:
-                                        Need to add provinces from db
-                                       -->
+                                    @foreach($provinces as $prov)
+                                        <option value="{{$prov->id}}">{{$prov->name}}</option>
+                                    @endforeach
                                 </select>
  
                                 @error('province')
