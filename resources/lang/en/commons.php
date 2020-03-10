@@ -14,7 +14,7 @@ return [
     
     'appName' => 'Portal',
     'title' => 'Registro de Incidencias',
-    'email' => 'e-Mail',
+    'email' => 'E-Mail',
     'password' => 'Password',
     'rememberme' => 'Remember me',
     'login' => 'Login',
@@ -32,6 +32,6 @@ return [
     'district' => 'District',
     'address' => 'Address',
     'phone' => 'Phone',
-    'emailConfirm' => 'Confirm e-Mail',
+    'emailConfirm' => 'Confirm E-Mail',
     'passwordConfirm' => 'Confirm Password',
 ];
