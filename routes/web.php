@@ -26,5 +26,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/registerCanton', 'Auth\RegisterController@loadCanton')->name('registerCanton');
 Route::post('/registerDistrict', 'Auth\RegisterController@loadDistrict')->name('registerDistrict');
 
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('registerUser', 'Auth\RegisterController@register')->name('registerUser');
 
 
