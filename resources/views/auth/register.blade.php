@@ -321,13 +321,8 @@
             $(".print-error-msg").find("ul").html('');
             $(".print-error-msg").css('display','block');
             $.each( msg, function( key, value ) {
-<<<<<<< HEAD
-                $.each(value, function (keyVal, val) {
-                    $(".print-error-msg").find("ul").append('<li>' + val + '</li>');
-=======
                 $.each( value, function (keyVal, val){
                     $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
->>>>>>> bdc829d1f1c9a0fe7665be8f5d3cbab9cdcb67a0
                 });
             });
         }
