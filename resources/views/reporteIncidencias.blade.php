@@ -11,13 +11,13 @@
                         <div class="col-md-6"><!--col-->
                             <div class="form-group">
                                 <label for="id">ID</label>
-                                <input type="number" class="form-control" id="id" />
+                                <input type="number" class="form-control" id="id" value="{{ Auth::user()->id }}" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombre">Nombre Completo</label>
-                                <input type="text" class="form-control" id="nombre" />
+                                <input type="text" class="form-control" id="nombre" value="{{ Auth::user()->name }} {{ Auth::user()->lastName1 }}"/>
                             </div>
                         </div>
                         </div>

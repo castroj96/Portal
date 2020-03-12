@@ -11,7 +11,7 @@ return [
     | the common words used along the whole application.
     |
     */
-    
+
     'appName' => 'Portal',
     'title' => 'Registro de Incidencias',
     'email' => 'E-Mail',

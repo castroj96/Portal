@@ -15,7 +15,7 @@ class ProvincesTableSeeder extends Seeder
         $provinces = [
             [
                 'id' => '1',
-                'name' => 'San Jose',
+                'name' => 'San José',
             ],
             [
                 'id' => '2',
