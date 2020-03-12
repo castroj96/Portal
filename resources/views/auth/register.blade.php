@@ -1,3 +1,17 @@
+<!--
+****************************************************************
+* File: register.blade.php
+* Description: This view is presenting the register blade form
+*
+****************************************************************
+*   MM/DD/YYYY  (XXX)   Description
+****************************************************************
+*   02/28/2020  (JCR)   Created register view
+*   03/04/2020  (ASR)   Added required inputs
+*   03/10/2020  (JCR)   Added ajax requests
+****************************************************************
+-->
+
 @extends('layouts.app')
 
 @section('content')
@@ -215,13 +229,11 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var _token = $('input[name="_token"]').val();
-        var province = $('select[name="province"]').val();
-        var canton = $('select[name="canton"]').val();
 
         $("#province").on('click change',function(e){
             e.preventDefault();
 
-            province = $('select[name="province"]').val();
+            var province = $('select[name="province"]').val();
 
             $.ajax({
                 url: '/registerCanton',
@@ -239,7 +251,7 @@
         $("#canton").on('click change',function(e){
             e.preventDefault();
 
-            canton = $('select[name="canton"]').val();
+            var canton = $('select[name="canton"]').val();
 
             $.ajax({
                 url: '/registerDistrict',
@@ -260,8 +272,8 @@
             var name = $('input[name="name"]').val();
             var lastName1 = $('input[name="lastName1"]').val();
             var lastName2 = $('input[name="lastName2"]').val();
-            province = $('select[name="province"]').val();
-            canton = $('select[name="canton"]').val();
+            var province = $('select[name="province"]').val();
+            var canton = $('select[name="canton"]').val();
             var district  = $('select[name="district"]').val();
             var address1 = $('input[name="address1"]').val();
             var phone = $('input[name="phone"]').val();
@@ -309,8 +321,11 @@
             $(".print-error-msg").find("ul").html('');
             $(".print-error-msg").css('display','block');
             $.each( msg, function( key, value ) {
-                $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+                $.each( value, function (keyVal, val){
+                    $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
+                });
             });
         }
+
     });
 </script>
