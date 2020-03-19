@@ -288,7 +288,7 @@
                 data:{_token: _token, id: id, name: name, lastName1: lastName1, lastName2: lastName2, province: province, canton: canton, district: district, address1: address1, phone: phone, email: email, email_confirmation: email_confirmation, password: password, password_confirmation: password_confirmation},
                 success: function(data)
                 {
-                    if($.isEmptyObject(data.error)){
+                    if(!$.isEmptyObject(data.error)){
                         printMsg(data, true);
                     }else{
                         printMsg(data, false);
