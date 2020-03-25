@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/reporteIncidencias', function () {
-    return view('reporteIncidencias');
-});
+/*Route::get('/incidentReport', function () {
+    return view('incidentReport');
+});*/
 
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
@@ -29,5 +29,16 @@ Route::post('/registerDistrict', 'Auth\RegisterController@loadDistrict')->name('
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('registerUser', 'Auth\RegisterController@register')->name('registerUser');
+
+//incidentReport Routes...
+Route::get('incidentReport', 'IncidentReportController@showIncidentReportForm')->name('incidentReport');
+Route::post('/incidentCanton', 'IncidentReportController@loadCanton')->name('incidentCanton');
+Route::post('/incidentDistrict', 'IncidentReportController@loadDistrict')->name('incidentDistrict');
+Route::post('/registerIncidentReport', 'IncidentReportController@registerIncidentReport')->name('registerIncidentReport');
+
+//incidentUpdate Routes...
+Route::get('/incidentUpdate', function () {
+    return view('incidentUpdate');
+});
 
 

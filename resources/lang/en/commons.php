@@ -34,4 +34,13 @@ return [
     'phone' => 'Phone',
     'emailConfirm' => 'Confirm E-Mail',
     'passwordConfirm' => 'Confirm Password',
+
+    'fullName'=> 'Full Name',
+    'category'=> 'Category',
+    'company'=> 'Company',
+    'georeference'=> 'Georeference',
+    'images'=> 'Images',
+    'details'=> 'Details',
+    'state'=> 'State',
+    'actions'=> 'Actions'
 ];
