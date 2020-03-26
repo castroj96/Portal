@@ -191,6 +191,7 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -258,15 +259,7 @@
             form.append('pictures', Object.values($('#images')[0].files));
             form.append('details', $("textarea[name='details']").val());
 
-            /*
-            for (var key of form.entries()) {
-                console.log(key[0] + ', ' + key[1]);
-            }*/
-
             $.ajax({
-               /* headers: {
-                    'X-CSRF-TOKEN': _token //se necesitó incluir en el header al poner el atributo processData: false
-                },*/
                 url: '/registerIncidentReport',
                 method: "POST",
                 data: form,
@@ -313,9 +306,6 @@
             });
         }
 
-
-
-
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -325,11 +315,8 @@
         }
 
         function showPosition(position) {
-
             var latlon = position.coords.latitude + "," + position.coords.longitude;
-
-            var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&markers=color:red%7Clabel:H%7C" + latlon + "&zoom=15&marker=true&&size=400x300&sensor=false&key=AIzaSyCBxXNim-ylmA-uhQOm9i7gZy-E8buNoSs";
-
+            var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&markers=color:red%7Clabel:H%7C" + latlon + "&zoom=15&marker=true&&size=400x300&sensor=false&key={{ $keys }}";
             document.getElementById("location").innerHTML = "<img src='"+img_url+"'>";
         }
 
