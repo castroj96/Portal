@@ -17,10 +17,11 @@ class IncidentReportController extends Controller
 
     public function showIncidentReportForm()
     {
+        $keys = config('app.GMAPKEY');
         $provinces = DB::table('provinces')->get();
         $companies = DB::table('companies')->get();
         $categories = DB::table('categories')->get();
-        return view('incidentReport', compact('provinces','companies', 'categories'));
+        return view('incidentReport', compact('provinces','companies', 'categories', 'keys'));
     }
 
     protected function loadCanton(Request $request)
