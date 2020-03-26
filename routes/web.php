@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('/incidentReport', function () {
-    return view('incidentReport');
-});*/
-
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/registerCanton', 'Auth\RegisterController@loadCanton')->name('registerCanton');

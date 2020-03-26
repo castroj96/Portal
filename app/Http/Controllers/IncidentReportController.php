@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class IncidentReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
     public function showIncidentReportForm()
     {
         $provinces = DB::table('provinces')->get();

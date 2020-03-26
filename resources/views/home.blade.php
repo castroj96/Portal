@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <form id="incidentReport" action="{{ route('incidentReport') }}" method="GET" style="display: block;">
+                        @csrf
+                        <input type="submit" class="btn btn-info" value="{{ __('commons.reportAnIncident') }}"/>
+                    </form>
+
                 </div>
             </div>
         </div>

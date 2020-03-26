@@ -11,6 +11,7 @@ class CompaniesTableSeeder extends Seeder
      */
     public function run()
     {
+        //
         $companies = [
             [
                 'id' => '1',

@@ -1,17 +1,3 @@
-<!--
-****************************************************************
-* File: register.blade.php
-* Description: This view is presenting the register blade form
-*
-****************************************************************
-*   MM/DD/YYYY  (XXX)   Description
-****************************************************************
-*   02/28/2020  (JCR)   Created register view
-*   03/04/2020  (ASR)   Added required inputs
-*   03/10/2020  (JCR)   Added ajax requests
-****************************************************************
--->
-
 @extends('layouts.app')
 
 @section('content')
@@ -314,17 +300,26 @@
 
         function printMsg(msg, success){
             if (success == true)
+            {
                 $(".print-error-msg").removeClass("alert-danger").addClass("alert-success");
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display','block');
+                $.each( msg, function( key, value ) {
+                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
+                });
+            }
             else
+            {
                 $(".print-error-msg").removeClass("alert-success").addClass("alert-danger");
 
-            $(".print-error-msg").find("ul").html('');
-            $(".print-error-msg").css('display','block');
-            $.each( msg, function( key, value ) {
-                $.each( value, function (keyVal, val){
-                    $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display','block');
+                $.each( msg, function( key, value ) {
+                    $.each( value, function (keyVal, val){
+                        $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
+                    });
                 });
-            });
+            }
         }
 
     });
