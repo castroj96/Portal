@@ -11,22 +11,19 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
+        //
         $categories = [
             [
                 'id' => '1',
-                'name' => 'Puentes',
-            ],
-            [
-                'id' => '2',
                 'name' => 'Carreteras',
             ],
             [
-                'id' => '3',
-                'name' => 'Servicios Públicos',
+                'id' => '2',
+                'name' => 'Telefonía',
             ],
             [
-                'id' => '4',
-                'name' => 'Servicios Privados',
+                'id' => '3',
+                'name' => 'Agua',
             ],
         ];
 

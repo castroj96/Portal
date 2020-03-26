@@ -34,7 +34,7 @@ return [
     'phone' => 'Phone',
     'emailConfirm' => 'Confirm E-Mail',
     'passwordConfirm' => 'Confirm Password',
-
+    'reportAnIncident' => 'Report an incident',
     'fullName'=> 'Full Name',
     'category'=> 'Category',
     'company'=> 'Company',

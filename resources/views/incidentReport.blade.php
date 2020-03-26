@@ -1,17 +1,3 @@
-<!--
-****************************************************************
-* File: register.blade.php
-* Description: This view is presenting the register blade form
-*
-****************************************************************
-*   MM/DD/YYYY  (XXX)   Description
-****************************************************************
-*   02/28/2020  (JCR)   Created register view
-*   03/04/2020  (ASR)   Added required inputs
-*   03/10/2020  (JCR)   Added ajax requests
-****************************************************************
--->
-
 @extends('layouts.app')
 
 @section('content')
@@ -19,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Incident Report') }}</div>
+                <div class="card-header">{{ __('commons.reportAnIncident') }}</div>
 
                 <div class="card-body">
 
