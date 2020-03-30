@@ -13,7 +13,7 @@
                         <ul></ul>
                     </div>
 
-                    <form>
+                    <form id="ReportAnIncident">
                         @csrf
                         <div class="form-group row">
                                 <label for="id"class="col-md-4 col-form-label text-md-right">{{ __('commons.id') }}</label>
@@ -144,9 +144,8 @@
 
                         <div class="form-group row">
                             <label for="georeference" class="col-md-4 col-form-label text-md-right">{{ __('commons.georeference') }}</label>
-
                             <div class="col-md-6">
-
+                                <p id="location"></p>
                                 @error('georeference')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -190,6 +189,7 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -201,6 +201,9 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var _token = $('input[name="_token"]').val();
+        var location = document.getElementById("location");
+
+        getLocation();
 
         $("#province").on('click change',function(e){
             e.preventDefault();
@@ -254,15 +257,7 @@
             form.append('pictures', Object.values($('#images')[0].files));
             form.append('details', $("textarea[name='details']").val());
 
-            /*
-            for (var key of form.entries()) {
-                console.log(key[0] + ', ' + key[1]);
-            }*/
-
             $.ajax({
-               /* headers: {
-                    'X-CSRF-TOKEN': _token //se necesitó incluir en el header al poner el atributo processData: false
-                },*/
                 url: '/registerIncidentReport',
                 method: "POST",
                 data: form,
@@ -309,5 +304,25 @@
             });
         }
 
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                location.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&markers=color:red%7Clabel:H%7C" + latlon + "&zoom=15&marker=true&&size=400x300&sensor=false&key={{ $keys }}";
+            document.getElementById("location").innerHTML = "<img src='"+img_url+"'>";
+        }
+
     });
+
+
     </script>
+
+<script>
+
+</script>
