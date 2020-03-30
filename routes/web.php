@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Spatie\Sitemap\SitemapGenerator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/registerCanton', 'Auth\RegisterController@loadCanton')->name('registerCanton');
 Route::post('/registerDistrict', 'Auth\RegisterController@loadDistrict')->name('registerDistrict');
@@ -37,4 +38,13 @@ Route::get('/incidentUpdate', function () {
     return view('incidentUpdate');
 });
 
+Route::get('sitemap', function (){
 
+    SitemapGenerator::create('https://localhost')->writeToFile('sitemap.xml');
+    return 'Sitemap creado';
+});
+
+Route::get('go-to-sitemap', function (){
+
+    return 'Sitemap creado';
+});

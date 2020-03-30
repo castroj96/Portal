@@ -145,9 +145,7 @@
                         <div class="form-group row">
                             <label for="georeference" class="col-md-4 col-form-label text-md-right">{{ __('commons.georeference') }}</label>
                             <div class="col-md-6">
-
                                 <p id="location"></p>
-
                                 @error('georeference')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -328,4 +326,3 @@
 <script>
 
 </script>
-
