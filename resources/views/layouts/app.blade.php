@@ -55,6 +55,19 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    @auth
+                                        <a class="dropdown-item" href="{{ url('/home') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('home-form').submit();">
+                                            {{ __('commons.home') }}
+                                        </a>
+
+                                        <form id="home-form" action="{{ route('home') }}" method="GET" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    @endauth
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

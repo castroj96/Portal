@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('commons.reportAnIncident') }}</div>
 
                 <div class="card-body">
 
@@ -15,42 +15,43 @@
 
                     <form>
                         @csrf
-
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('commons.id') }}</label>
+                                <label for="id"class="col-md-4 col-form-label text-md-right">{{ __('commons.id') }}</label>
+                                <div class="col-md-6">
+                                    <input id="id" type="number" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ Auth::user()->id }}" required disabled>
 
-                            <div class="col-md-6">
-                                <input id="id" type="number" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ old('id') }}" required autocomplete="id" autofocus>
-
-                                @error('id')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('commons.name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
+                                    @error('id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
+                                    @enderror
+                                </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="lastName1" class="col-md-4 col-form-label text-md-right">{{ __('commons.lastName1') }}</label>
+                                <label for="name"class="col-md-4 col-form-label text-md-right">{{ __('commons.fullName') }}</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }} {{ Auth::user()->lastName1 }}" required disabled>
+
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('commons.category') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lastName1" type="text" class="form-control @error('lastName1') is-invalid @enderror" name="lastName1" value="{{ old('lastName1') }}" required autocomplete="lastName1" autofocus>
+                                <select id="category" name="category" class="form-control @error('category') is-invalid @enderror">
+                                    @foreach($categories as $cat)
+                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                    @endforeach
+                                </select>
 
-                                @error('lastName1')
+                                @error('category')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -59,16 +60,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="lastName2" class="col-md-4 col-form-label text-md-right">{{ __('commons.lastName2') }}</label>
+                            <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('commons.company') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lastName2" type="text" class="form-control @error('lastName2') is-invalid @enderror" name="lastName2" value="{{ old('lastName2') }}" required autocomplete="lastName2" autofocus>
+                                <select id="company" name="company" class="form-control @error('company') is-invalid @enderror">
+                                    @foreach($companies as $comp)
+                                        <option value="{{$comp->id}}">{{$comp->name}}</option>
+                                    @endforeach
+                                </select>
 
-                                @error('lastName2')
+                                @error('company')
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                         </div>
 
@@ -78,7 +83,7 @@
 
                             <div class="col-md-6">
                                 <select id="province" name="province" class="form-control @error('province') is-invalid @enderror">
-                                    @foreach($provinces as $prov)
+                                   @foreach($provinces as $prov)
                                         <option value="{{$prov->id}}">{{$prov->name}}</option>
                                     @endforeach
                                 </select>
@@ -123,14 +128,13 @@
                             </div>
                         </div>
 
-                        <!--address-->
                         <div class="form-group row">
-                            <label for="address1" class="col-md-4 col-form-label text-md-right">{{ __('commons.address') }}</label>
+                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('commons.address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address1" type="text" class="form-control @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}" required autocomplete="address1" autofocus>
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
 
-                                @error('address1')
+                                @error('address')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -139,65 +143,48 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('commons.phone') }}</label>
+                            <label for="georeference" class="col-md-4 col-form-label text-md-right">{{ __('commons.georeference') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
-                                @error('phone')
+                                @error('georeference')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('commons.images') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="images" type="file" accept="image/x-png,image/jpeg" class="form-control-file @error('images') is-invalid @enderror" name="images" multiple required>
+
+                                @error('images')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="details" class="col-md-4 col-form-label text-md-right">{{ __('commons.details') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="details" class="form-control row-cols-2 @error('details') is-invalid @enderror" name="details" value="{{ old('details') }}" required autocomplete="details" autofocus></textarea>
+
+                                @error('details')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('commons.email') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email-confirm" class="col-md-4 col-form-label text-md-right">{{ __('commons.emailConfirm') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="emailconfirm" type="email" class="form-control" name="emailconfirm" value="{{ old('email_confirmation ') }}" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('commons.password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('commons.passwordConfirm') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="passwordconfirm" type="password" class="form-control" name="passwordconfirm" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-5">
                                 <button type="submit" class="btn btn-primary btn-submit" id="btn-submit" name="btn-submit">
                                     {{ __('commons.register') }}
                                 </button>
@@ -210,7 +197,6 @@
     </div>
 </div>
 @endsection
-
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -222,7 +208,7 @@
             var province = $('select[name="province"]').val();
 
             $.ajax({
-                url: '/registerCanton',
+                url: '/incidentCanton',
                 method: "POST",
                 data:{_token: _token, province: province},
                 success: function(data)
@@ -240,7 +226,7 @@
             var canton = $('select[name="canton"]').val();
 
             $.ajax({
-                url: '/registerDistrict',
+                url: '/incidentDistrict',
                 method: "POST",
                 data:{_token: _token, canton: canton},
                 success: function(data)
@@ -254,24 +240,34 @@
         $("#btn-submit").on('click', function(e){
             e.preventDefault();
 
-            var id = $('input[name="id"]').val();
-            var name = $('input[name="name"]').val();
-            var lastName1 = $('input[name="lastName1"]').val();
-            var lastName2 = $('input[name="lastName2"]').val();
-            var province = $('select[name="province"]').val();
-            var canton = $('select[name="canton"]').val();
-            var district  = $('select[name="district"]').val();
-            var address1 = $('input[name="address1"]').val();
-            var phone = $('input[name="phone"]').val();
-            var email = $('input[name="email"]').val();
-            var email_confirmation = $("input[name='emailconfirm']").val();
-            var password = $('input[name="password"]').val();
-            var password_confirmation = $("input[name='passwordconfirm']").val();
+            form = new FormData();
+            form.append('_token',_token);
+            form.append('user',$('input[name="id"]').val());
+            form.append('category',$('select[name="category"]').val());
+            form.append('company',$('select[name="company"]').val());
+            form.append('province',$('select[name="province"]').val());
+            form.append('canton',$('select[name="canton"]').val());
+            form.append('district',$('select[name="district"]').val());
+            form.append('address', $('input[name="address"]').val());
+            form.append('latitude', 0.01);
+            form.append('longitude', 0.02);
+            form.append('pictures', Object.values($('#images')[0].files));
+            form.append('details', $("textarea[name='details']").val());
+
+            /*
+            for (var key of form.entries()) {
+                console.log(key[0] + ', ' + key[1]);
+            }*/
 
             $.ajax({
-                url: '/registerUser',
+               /* headers: {
+                    'X-CSRF-TOKEN': _token //se necesitó incluir en el header al poner el atributo processData: false
+                },*/
+                url: '/registerIncidentReport',
                 method: "POST",
-                data:{_token: _token, id: id, name: name, lastName1: lastName1, lastName2: lastName2, province: province, canton: canton, district: district, address1: address1, phone: phone, email: email, email_confirmation: email_confirmation, password: password, password_confirmation: password_confirmation},
+                data: form,
+                contentType: false, //si no se desactiva el contentType los datos correctamente en el servidor
+                processData: false,
                 success: function(data)
                 {
                     if(!$.isEmptyObject(data.error)){
@@ -300,27 +296,18 @@
 
         function printMsg(msg, success){
             if (success == true)
-            {
                 $(".print-error-msg").removeClass("alert-danger").addClass("alert-success");
-                $(".print-error-msg").find("ul").html('');
-                $(".print-error-msg").css('display','block');
-                $.each( msg, function( key, value ) {
-                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
-                });
-            }
             else
-            {
                 $(".print-error-msg").removeClass("alert-success").addClass("alert-danger");
 
-                $(".print-error-msg").find("ul").html('');
-                $(".print-error-msg").css('display','block');
-                $.each( msg, function( key, value ) {
-                    $.each( value, function (keyVal, val){
-                        $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
-                    });
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg, function( key, value ) {
+                $.each( value, function (keyVal, val){
+                    $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
                 });
-            }
+            });
         }
 
     });
-</script>
+    </script>

@@ -17,6 +17,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/registerCanton', 'Auth\RegisterController@loadCanton')->name('registerCanton');
+Route::post('/registerDistrict', 'Auth\RegisterController@loadDistrict')->name('registerDistrict');
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('registerUser', 'Auth\RegisterController@register')->name('registerUser');
+
+//incidentReport Routes...
+Route::get('incidentReport', 'IncidentReportController@showIncidentReportForm')->name('incidentReport');
+Route::post('/incidentCanton', 'IncidentReportController@loadCanton')->name('incidentCanton');
+Route::post('/incidentDistrict', 'IncidentReportController@loadDistrict')->name('incidentDistrict');
+Route::post('/registerIncidentReport', 'IncidentReportController@registerIncidentReport')->name('registerIncidentReport');
+
+//incidentUpdate Routes...
+Route::get('/incidentUpdate', function () {
+    return view('incidentUpdate');
+});
+
 Route::get('sitemap', function (){
 
     SitemapGenerator::create('https://localhost')->writeToFile('sitemap.xml');
@@ -27,12 +48,3 @@ Route::get('go-to-sitemap', function (){
 
     return 'Sitemap creado';
 });
-
-Route::get('/reporteIncidencias', function () {
-    return view('reporteIncidencias');
-});
-
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-
-
