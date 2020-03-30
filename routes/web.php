@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Spatie\Sitemap\SitemapGenerator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('sitemap', function (){
+
+    SitemapGenerator::create('https://localhost')->writeToFile('sitemap.xml');
+    return 'Sitemap creado';
+});
+
+Route::get('go-to-sitemap', function (){
+
+    return 'Sitemap creado';
 });
 
 Route::get('/reporteIncidencias', function () {
