@@ -251,25 +251,6 @@
                 + "</td>"
             return row += "</tr>";
         }
-        /*$('#tb_incidents').DataTable({
-                    "processing": true,
-                    "serverSide": true,
-                    "ajax": {
-                        "method": "POST",
-                        "url": "/loadIncidents",
-                        "data": {_token: _token, user: 702430859},
-                    },
-                    "columns": [
-                        { "data": "category" },
-                        { "data": "company" },
-                        { "data": "province" },
-                        { "data": "canton" },
-                        { "data": "district" },
-                        { "data": "address" },
-                        { "data": "state" },
-                        { "data": "id" }
-                    ]
-                });*/
 
         $("#tb_incidents").delegate('.ver', 'click', function () {
             var id= $(this).attr('data-id');

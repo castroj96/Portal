@@ -42,5 +42,6 @@ return [
     'images'=> 'Images',
     'details'=> 'Details',
     'state'=> 'State',
-    'actions'=> 'Actions'
+    'actions'=> 'Actions',
+    'SeeMyIncidentes' => 'See my incidents reported',
 ];

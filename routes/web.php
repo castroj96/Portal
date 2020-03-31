@@ -36,7 +36,7 @@ Route::post('/registerIncidentReport', 'IncidentReportController@registerInciden
 //incidentUpdate Routes...
 Route::get('/incidentUpdate', function () {
     return view('incidentUpdate');
-});
+})->name('incidentUpdate');
 Route::post('/loadIncidents', 'IncidentUpdateController@loadIncidents')->name('loadIncidents');
 Route::post('/loadIncidentDetails', 'IncidentUpdateController@loadIncidentDetails')->name('loadIncidentDetails');
 
