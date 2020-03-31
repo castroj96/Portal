@@ -252,15 +252,19 @@
             form.append('canton',$('select[name="canton"]').val());
             form.append('district',$('select[name="district"]').val());
             form.append('address', $('input[name="address"]').val());
-            form.append('latitude', 0.01);
-            form.append('longitude', 0.02);
-            form.append('pictures', Object.values($('#images')[0].files));
+            form.append('latitude', latitude);
+            form.append('longitude', longitude);
+
+            for (i = 0; i < $('#images')[0].files.length; i++) {
+                form.append('pictures[]', $('#images')[0].files[i]);
+            }
             form.append('details', $("textarea[name='details']").val());
 
             $.ajax({
                 url: '/registerIncidentReport',
                 method: "POST",
                 data: form,
+                enctype: 'multipart/form-data',
                 contentType: false, //si no se desactiva el contentType los datos correctamente en el servidor
                 processData: false,
                 success: function(data)
@@ -313,7 +317,9 @@
         }
 
         function showPosition(position) {
-            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            latitude= position.coords.latitude;
+            longitude= position.coords.longitude;
+            var latlon = latitude + "," + longitude;
             var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&markers=color:red%7Clabel:H%7C" + latlon + "&zoom=15&marker=true&&size=400x300&sensor=false&key={{ $keys }}";
             document.getElementById("location").innerHTML = "<img src='"+img_url+"'>";
         }
