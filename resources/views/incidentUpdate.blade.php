@@ -7,6 +7,8 @@
             <div class="card">
                 <div class="card-header">{{ __('Incident Update') }}</div>
 
+                <input type="hidden" name="idUser" id="idUser" value="{{ Auth::user()->id }}"/>
+
                 <div class="card-body">
 
                     <div class="alert alert-danger print-error-msg" style="display:none">
@@ -209,6 +211,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var _token = $('input[name="_token"]').val();
+        var _user = $('input[name="idUser"]').val();
         updateData();
 
         function updateData(datos) {
@@ -217,7 +220,7 @@
             if (datos === undefined) {
                 $.ajax({
                     url: "/loadIncidents",
-                    data: {_token: _token, user: '702430859'},//poner id de usuario
+                    data: {_token: _token, user: _user},
                     method: "POST",
                     success: function (data) {
                         $.each(data, function (i, row) {
