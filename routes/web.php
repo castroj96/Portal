@@ -40,8 +40,8 @@ Route::get('/incidentUpdate', function () {
 
 Route::get('sitemap', function (){
 
-    SitemapGenerator::create('https://localhost')->writeToFile('sitemap.xml');
-    return 'Sitemap creado';
+    return SitemapGenerator::create('https://spatie.be/en')->getSitemap()->writeToFile('sitemap.xml');
+    //return 'Sitemap creado';
 });
 
 Route::get('go-to-sitemap', function (){
