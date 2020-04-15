@@ -34,11 +34,10 @@ Route::post('/incidentDistrict', 'IncidentReportController@loadDistrict')->name(
 Route::post('/registerIncidentReport', 'IncidentReportController@registerIncidentReport')->name('registerIncidentReport');
 
 //incidentUpdate Routes...
-Route::get('/incidentUpdate', function () {
-    return view('incidentUpdate');
-})->name('incidentUpdate');
+Route::get('incidentUpdate', 'IncidentUpdateController@showIncidentUpdate')->name('incidentUpdate');
 Route::post('/loadIncidents', 'IncidentUpdateController@loadIncidents')->name('loadIncidents');
 Route::post('/loadIncidentDetails', 'IncidentUpdateController@loadIncidentDetails')->name('loadIncidentDetails');
+Route::post('/updateIncidentState', 'IncidentUpdateController@updateIncidentState')->name('updateIncidentState');
 
 /* Sitemap Route*/
 Route::get('/sitemap.xml', 'SitemapController@index')->name('sitemap.xml');

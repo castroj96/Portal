@@ -10,10 +10,6 @@
                 <input type="hidden" name="idUser" id="idUser" value="{{ Auth::user()->id }}"/>
 
                 <div class="card-body">
-
-                    <div class="alert alert-danger print-error-msg" style="display:none">
-                        <ul></ul>
-                    </div>
                     <table id="tb_incidents" class="display" style="width: 100%">
                         <thead>
                         <tr>
@@ -27,6 +23,9 @@
                             <th>{{__('commons.actions')}}</th>
                         </tr>
                         </thead>
+                        <tbody>
+
+                        </tbody>
                         <tfoot>
 
                         </tfoot>
@@ -41,12 +40,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="modal fade" id="modalIncident" role="dialog" aria-hidden="true">
-                <div class="modal-dialog normal">
-                    <div class="modal-content normal">
+                <div class="modal-dialog" style="max-width: 700px;">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <div class="modal-body normal">
+                        <div class="modal-body">
 
                             <div class="alert alert-danger print-error-msg" style="display:none">
                                 <ul></ul>
@@ -143,9 +142,8 @@
 
                                 <div class="form-group row">
                                     <label for="georeference" class="col-md-4 col-form-label text-md-right">{{ __('commons.georeference') }}</label>
-
                                     <div class="col-md-6">
-
+                                        <p id="location"></p>
                                         @error('georeference')
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -158,7 +156,7 @@
                                     <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('commons.images') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="images" type="file" accept="image/x-png,image/jpeg" class="form-control-file @error('images') is-invalid @enderror" name="images" multiple required>
+                                      <div id="uploadImages"></div>
 
                                         @error('images')
                                         <span class="invalid-feedback" role="alert">
@@ -186,6 +184,11 @@
                                     <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('commons.state') }}</label>
 
                                     <div class="col-md-6">
+                                        <select id="state" name="state" class="form-control @error('state') is-invalid @enderror">
+                                            <option value="1">Reportado</option>
+                                            <option value="2">En Proceso</option>
+                                            <option value="3">Finalizado</option>
+                                        </select>
 
                                         @error('state')
                                         <span class="invalid-feedback" role="alert">
@@ -198,7 +201,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button id="btnActualizar" type="button" class="btn btn-primary">Actualizar</button>
+                            <button id="btn-update" type="button" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
                 </div>
@@ -212,10 +215,11 @@
     $(document).ready(function(){
         var _token = $('input[name="_token"]').val();
         var _user = $('input[name="idUser"]').val();
+        var location = document.getElementById("location");
         updateData();
 
         function updateData(datos) {
-            $("#tb_incidents body").empty();
+            $("#tb_incidents tbody").empty();
 
             if (datos === undefined) {
                 $.ajax({
@@ -241,20 +245,20 @@
                 + "<td>" + rowData.address + "</td>";
 
             if(rowData.state=='1')
-                row += "<td>Reportado</td>"
+                row += "<td>Reportado</td>";
             else if(rowData.state=='2')
-                row += "<td>En Proceso</td>"
+                row += "<td>En Proceso</td>";
             else
-                row += "<td>Finalizado</td>"
+                row += "<td>Finalizado</td>";
 
             row+= "<td><button data-id='"+rowData.id+"' type='button' class='btn btn-primary ver' style='max-width:80px; max-height:30px;'>Ver</button>"
                 + "</td>"
             return row += "</tr>";
         }
 
-        $("#tb_incidents").delegate('.ver', 'click', function () {
+        $("#tb_incidents").delegate('.ver', 'click', function (e) {
+            e.preventDefault();
             var id= $(this).attr('data-id');
-
             $.ajax({
                 url: "/loadIncidentDetails",
                 data: {_token: _token, id:  id},
@@ -267,13 +271,67 @@
                     $("#district").val(data.district);
                     $("#address").val(data.address);
                     $("#details").val(data.details);
+                    $("#state").val(data.state);
+                    $( "#uploadImages" ).empty();
+
+                    var assetIncident='{{asset("/storage/incidents")}}';
+                    $.each(JSON.parse(data.pictures), function (i, picture) {
+                        $( "#uploadImages" ).append("<img style='width:50%' src='"+assetIncident+"/"+picture+"') }}'/>");
+                    });
+                    showPosition(data.latitude, data.longitude);
 
                     $('#modalIncident').modal({
                         show: true,
                         backdrop: 'static'
                     });
+                    $('#btn-update').attr("data-id", id);
                 }
             });
         });
+
+        function showPosition(latitude, longitude) {
+            var latlon = latitude + "," + longitude;
+            var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&markers=color:red%7Clabel:H%7C" + latlon + "&zoom=15&marker=true&&size=400x300&sensor=false&key={{ $keys }}";
+            document.getElementById("location").innerHTML = "<img style='width:100%' src='"+img_url+"'>";
+        }
+
+        $("#btn-update").on('click', function(e){
+            e.preventDefault();
+
+            var incidentId= $(this).attr('data-id');
+            var state = $('select[name="state"]').val();
+
+            $.ajax({
+                url: '/updateIncidentState',
+                method: "POST",
+                data:{_token: _token, id: incidentId, state: state},
+                success: function(data)
+                {
+                    if(!$.isEmptyObject(data.error)){
+                        printMsg(data, true);
+                    }else{
+                        updateData();
+                        printMsg(data, false);
+                    }
+                }
+            })
+        });
+
+        function printMsg(msg, success){
+            console.log(success);
+            if (success == true)
+                $(".print-error-msg").removeClass("alert-danger").addClass("alert-success");
+            else
+                $(".print-error-msg").removeClass("alert-success").addClass("alert-danger");
+
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg, function( key, value ) {
+                $.each( value, function (keyVal, val){
+                    $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
+                });
+            });
+        }
+
     });
     </script>

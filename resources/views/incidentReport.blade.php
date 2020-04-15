@@ -158,6 +158,7 @@
                             <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('commons.images') }}</label>
 
                             <div class="col-md-6">
+                                <div id="uploadImages"></div>
                                 <input id="images" type="file" accept="image/x-png,image/jpeg" class="form-control-file @error('images') is-invalid @enderror" name="images" multiple required>
 
                                 @error('images')
@@ -278,6 +279,23 @@
             })
         });
 
+        $("#images").change(function () {
+            $('#uploadImages').empty();
+            filePreview(this);
+        });
+
+        function filePreview(input) {
+            if (input.files) {
+                for (i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#uploadImages').append('<img style="width: 50%" src="' + e.target.result + '"/>');
+                    };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
         function populateSelect(data, name)
         {
             $(name).find("select").html();
@@ -321,14 +339,10 @@
             longitude= position.coords.longitude;
             var latlon = latitude + "," + longitude;
             var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&markers=color:red%7Clabel:H%7C" + latlon + "&zoom=15&marker=true&&size=400x300&sensor=false&key={{ $keys }}";
-            document.getElementById("location").innerHTML = "<img src='"+img_url+"'>";
+            document.getElementById("location").innerHTML = "<img style='width:100%' src='"+img_url+"'>";
         }
 
     });
 
 
     </script>
-
-<script>
-
-</script>
