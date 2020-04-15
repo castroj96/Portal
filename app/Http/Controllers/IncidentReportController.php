@@ -108,8 +108,5 @@ class IncidentReportController extends Controller
             return response()->json(['error'=>$validData->errors()->all()]);
         }
     }
-    public static function incidentReportindex()
-    {
-        return view('incidentReport', null);
-    }
+
 }
