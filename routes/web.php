@@ -40,13 +40,8 @@ Route::get('/incidentUpdate', function () {
 Route::post('/loadIncidents', 'IncidentUpdateController@loadIncidents')->name('loadIncidents');
 Route::post('/loadIncidentDetails', 'IncidentUpdateController@loadIncidentDetails')->name('loadIncidentDetails');
 
-Route::get('sitemap', function (){
-
-    SitemapGenerator::create('https://localhost')->writeToFile('sitemap.xml');
-    return 'Sitemap creado';
-});
-
-Route::get('go-to-sitemap', function (){
-
-    return 'Sitemap creado';
-});
+/* Sitemap Route*/
+Route::get('/sitemap.xml', 'SitemapController@index')->name('sitemap.xml');
+Route::get('/sitemap.xml/home', 'SitemapController@home');
+Route::get('/sitemap.xml/incidentReport', 'SitemapController@incidentReport');
+Route::get('/sitemap.xml/incidentUpdate', 'SitemapController@incidentUpdate');

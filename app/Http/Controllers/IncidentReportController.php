@@ -115,4 +115,5 @@ class IncidentReportController extends Controller
             return response()->json(['error'=>$validData->errors()->all()]);
         }
     }
+
 }
