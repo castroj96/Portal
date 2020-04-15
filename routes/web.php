@@ -40,27 +40,6 @@ Route::get('/incidentUpdate', function () {
 Route::post('/loadIncidents', 'IncidentUpdateController@loadIncidents')->name('loadIncidents');
 Route::post('/loadIncidentDetails', 'IncidentUpdateController@loadIncidentDetails')->name('loadIncidentDetails');
 
-Route::get('/sitemap', function (){
-
-    //return SitemapGenerator::create('https://spatie.be/en')->getSitemap()->writeToFile('sitemap.xml');
-    return SitemapGenerator::create('https://localhost/')->getSitemap()->writeToFile('sitemap.xml');
-    //return 'Sitemap creado';
-});
-
-Route::get('/go-to-sitemap', function (){
-    Route::view('sitemap.index', 'sitemap.index')->name('sitemap');
-    Route::get('/sitemap.index.xml', 'SitemapController@index');
-    //return view('sitemap'); //'Sitemap creado';
-});
-/*
-Route::get('/sitemapIndex', function (){
-    //Route::view('sitemap.index', 'sitemap.index')->name('sitemap');
-    //Route::get('/sitemap.index.xml', 'SitemapController@index');
-    //return view('sitemap'); //'Sitemap creado';
-    $sitemapIndex = Route::get('/sitemapIndex', 'SitemapController@index');
-    return $sitemapIndex;
-});*/
-
 /* Sitemap Route*/
 Route::get('/sitemap.xml', 'SitemapController@index')->name('sitemap.xml');
 Route::get('/sitemap.xml/home', 'SitemapController@home');
