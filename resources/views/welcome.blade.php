@@ -81,6 +81,8 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">{{__('commons.home')}}</a>
+                        <a href="{{ route('incidentReport') }}">{{__('commons.reportAnIncident')}}</a>
+                        <a href="{{ route('incidentUpdate') }}">{{__('commons.SeeMyIncidentes')}}</a>
                     @else
                         <a href="{{ route('login') }}">{{__('commons.login')}}</a>
 
@@ -133,7 +135,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="#">{{__('commons.siteMap')}}</a>
+                    <a href="{{ route('sitemap') }}">{{__('commons.siteMap')}}</a>
                 </div>
 
             </div>

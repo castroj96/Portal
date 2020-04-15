@@ -40,7 +40,7 @@ Route::post('/loadIncidentDetails', 'IncidentUpdateController@loadIncidentDetail
 Route::post('/updateIncidentState', 'IncidentUpdateController@updateIncidentState')->name('updateIncidentState');
 
 /* Sitemap Route*/
-Route::get('/sitemap.xml', 'SitemapController@index')->name('sitemap.xml');
+Route::get('/sitemap.xml', 'SitemapController@index')->name('sitemap');
 Route::get('/sitemap.xml/home', 'SitemapController@home');
 Route::get('/sitemap.xml/incidentReport', 'SitemapController@incidentReport');
 Route::get('/sitemap.xml/incidentUpdate', 'SitemapController@incidentUpdate');
