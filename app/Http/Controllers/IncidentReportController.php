@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\UploadedFile;
 
 class IncidentReportController extends Controller
 {
@@ -51,14 +52,7 @@ class IncidentReportController extends Controller
         return response()->json(categories);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-
-  /*  public function crearArray(array $data)
+    protected function createArray(array $data)
     {
         return array('user' => $data['user'],
             'category' => $data['category'],
@@ -69,10 +63,10 @@ class IncidentReportController extends Controller
             'address' => $data['address'],
             'latitude' => $data['latitude'],
             'longitude' => $data['longitude'],
-            'pictures' => "'[\"img1\",\"img2\"]'", // '[\"1\",\"2\"]'tiene que tener esta estructura
-            'details' => $data['details'],//detail en base
+            'pictures' => $data['pictures'],
+            'details' => $data['details'],
             'state' => '1');
-    }*/
+    }
 
     /**
      * Handle a registration request for the application.
@@ -82,7 +76,8 @@ class IncidentReportController extends Controller
      */
     public function registerIncidentReport(Request $request)
     {
-        $validData = Validator::make($request->all(), [
+        $requestData= $request->all();
+        $validData = Validator::make($requestData, [
             'user' => 'required|integer|digits:9',
             'category' => 'required|integer',
             'company' => 'required|integer',
@@ -92,17 +87,29 @@ class IncidentReportController extends Controller
             'address' => 'required|string|max:190|min:10',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'pictures' => 'required',//hacer una validacion personalizada para limitar 4 imagenes
+            'pictures' => 'required|max:4',
             'pictures.*' => 'required|image',
             'details' => 'required|string|between:10,190'
         ]);
 
-        if ($validData->passes()){
-          //  $id = DB::table('incident_report')->insertGetId($this->crearArray($request->all()));
-           // if($id!=-1)
+        if ($validData->passes())
+        {
+            $imagesNames= array();
+            if($request->hasfile('pictures'))
+            {
+                foreach($request->file('pictures') as $img)
+                {
+                    $imagePath = $img->store('public/incidents');
+                    array_push($imagesNames,basename($imagePath));
+                }
+                $requestData['pictures']= json_encode($imagesNames);
+                DB::table('incident_report')->insert($this->createArray($requestData));
                 return response()->json(['success'=> 'Data saved']);
-         //   else
-          //      return response()->json(['error'=> 'Data could not be saved']);
+                //falta validar si se inserto bien
+                //return response()->json(['error'=> 'Data could not be saved']);
+            }else{
+                return response()->json(['error'=> 'Problems with images upload']);
+            }
         }
         else {
             return response()->json(['error'=>$validData->errors()->all()]);
