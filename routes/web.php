@@ -44,3 +44,4 @@ Route::post('/loadIncidentDetails', 'IncidentUpdateController@loadIncidentDetail
 Route::get('/sitemap.xml', 'SitemapController@index')->name('sitemap.xml');
 Route::get('/sitemap.xml/home', 'SitemapController@home');
 Route::get('/sitemap.xml/incidentReport', 'SitemapController@incidentReport');
+Route::get('/sitemap.xml/incidentUpdate', 'SitemapController@incidentUpdate');

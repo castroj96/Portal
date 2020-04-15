@@ -10,6 +10,7 @@ class SitemapController extends Controller
     public function index() {
         $home = HomeController::index();
         //$incidentReport = IncidentReportController::all()->first();
+        //$incidentUpdate  = IncidentUpdateController::all();
         return response()->view('sitemap.index', [
             'home' => $home,
             //'incidentReport' => $incidentReport,
@@ -22,11 +23,17 @@ class SitemapController extends Controller
             'home' => $home,
         ])->header('Content-Type', 'text/xml');
     }
-
+/*
     public function incidentReport() {
         $incidentReport  = IncidentReportController::all();
         return response()->view('sitemap.incidentReport', [
             'incidentReport' => $incidentReport,
         ])->header('Content-Type', 'text/xml');
-    }
+    }*/
+    /*public function incidentUpdate() {
+        $incidentUpdate  = IncidentUpdateController::all();
+        return response()->view('sitemap.incidentUpdate', [
+            'incidentUpdate' => $incidentUpdate,
+        ])->header('Content-Type', 'text/xml');
+    }*/
 }

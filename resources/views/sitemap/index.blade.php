@@ -7,4 +7,7 @@
     <sitemap>
         <loc>http://localhost/sitemap.xml/incidentReport</loc>
     </sitemap>
+    <sitemap>
+        <loc>http://localhost/sitemap.xml/incidentUpdate</loc>
+    </sitemap>
 </sitemapindex>
