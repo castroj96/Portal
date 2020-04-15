@@ -16,7 +16,7 @@
 
                     <form id="incidentReport" action="{{ route('incidentReport') }}" method="GET" style="display: block;">
                         @csrf
-                        <input type="submit" class="btn btn-info" value="{{ __('commons.reportAnIncident') }}"/>
+                        <input type="submit" class="btn btn-primary" value="{{ __('commons.reportAnIncident') }}"/>
                     </form>
 
                     <br>

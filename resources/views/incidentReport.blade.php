@@ -270,8 +270,9 @@
                 processData: false,
                 success: function(data)
                 {
-                    if(!$.isEmptyObject(data.error)){
+                    if($.isEmptyObject(data.error)){
                         printMsg(data, true);
+                        window.location.reload(true);
                     }else{
                         printMsg(data, false);
                     }
@@ -313,17 +314,25 @@
 
         function printMsg(msg, success){
             if (success == true)
+            {
                 $(".print-error-msg").removeClass("alert-danger").addClass("alert-success");
-            else
-                $(".print-error-msg").removeClass("alert-success").addClass("alert-danger");
-
-            $(".print-error-msg").find("ul").html('');
-            $(".print-error-msg").css('display','block');
-            $.each( msg, function( key, value ) {
-                $.each( value, function (keyVal, val){
-                    $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display','block');
+                $.each( msg, function( key, value ) {
+                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
                 });
-            });
+            }
+            else
+            {
+                $(".print-error-msg").removeClass("alert-success").addClass("alert-danger");
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display','block');
+                $.each( msg, function( key, value ) {
+                    $.each( value, function (keyVal, val){
+                        $(".print-error-msg").find("ul").append('<li>'+val+'</li>');
+                    });
+                });
+            }
         }
 
         function getLocation() {
