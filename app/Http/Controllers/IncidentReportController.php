@@ -84,12 +84,12 @@ class IncidentReportController extends Controller
             'province' => 'required|integer|gte:1|lte:7',
             'canton' => 'required|integer|gte:1|lte:82',
             'district' => 'required|integer|gte:1|lte:484',
-            'address' => 'required|string|max:190|min:10',
+            'address' => 'required|string|max:190|min:10|regex:^([A-Za-z0-9\s]*)$',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'pictures' => 'required|max:4',
             'pictures.*' => 'required|image',
-            'details' => 'required|string|between:10,190'
+            'details' => 'required|string|between:10,190|regex:^([A-Za-z0-9\s]*)$\'
         ]);
 
         if ($validData->passes())
